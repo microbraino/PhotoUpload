@@ -36,7 +36,7 @@
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = PhotoUpload/AppDelegate.m; sourceTree = "<group>"; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = PhotoUpload/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = PhotoUpload/Info.plist; sourceTree = "<group>"; };
-		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = PhotoUpload/main.m; sourceTree = "<group>"; };
+		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = PhotoUpload/main.m; sourceTree = SOURCE_ROOT; };
 		334EE03AB1FEC06DEB61D194 /* Pods-PhotoUpload-PhotoUploadTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhotoUpload-PhotoUploadTests.release.xcconfig"; path = "Target Support Files/Pods-PhotoUpload-PhotoUploadTests/Pods-PhotoUpload-PhotoUploadTests.release.xcconfig"; sourceTree = "<group>"; };
 		44AD919547E2EB3D7F2AD2E4 /* libPods-PhotoUpload.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PhotoUpload.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		55C147E3D95602CAA9A41611 /* Pods-PhotoUpload.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhotoUpload.debug.xcconfig"; path = "Target Support Files/Pods-PhotoUpload/Pods-PhotoUpload.debug.xcconfig"; sourceTree = "<group>"; };
@@ -145,7 +145,6 @@
 				8A5A37EDB5E295AB51AB1FA6 /* Pods-PhotoUpload-PhotoUploadTests.debug.xcconfig */,
 				334EE03AB1FEC06DEB61D194 /* Pods-PhotoUpload-PhotoUploadTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};

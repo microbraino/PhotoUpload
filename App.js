@@ -10,14 +10,12 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 
+import API from "./api";
+
 class App extends React.Component {
-	render() {
-		return (
-			<View>
-				<Text>Hello world</Text>
-			</View>
-		);
-	}
+  render() {
+    return <API />;
+  }
 }
 
 const styles = StyleSheet.create({});
