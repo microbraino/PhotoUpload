@@ -7,24 +7,19 @@
  * @flow strict-local
  */
 
-import React from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-} from 'react-native';
+import React from "react";
+import { View, Text, StyleSheet } from "react-native";
 
 class App extends React.Component {
-  render(){
-    return (
-      <View>
-        <Text>Hello world</Text>
-      </View>
-    );
-  }
-};
+	render() {
+		return (
+			<View>
+				<Text>Hello world</Text>
+			</View>
+		);
+	}
+}
 
-const styles = StyleSheet.create({
-});
+const styles = StyleSheet.create({});
 
 export default App;
