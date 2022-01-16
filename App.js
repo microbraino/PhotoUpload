@@ -10,7 +10,8 @@
 import React from 'react';
 import {
   View,
-  Text
+  Text,
+  StyleSheet,
 } from 'react-native';
 
 class App extends React.Component {
