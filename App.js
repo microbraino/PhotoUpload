@@ -9,12 +9,18 @@
 
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
+import { Provider } from "react-redux";
 
 import API from "./api";
+import {store} from './api/redux/store';
 
 class App extends React.Component {
   render() {
-    return <API />;
+    return (
+      <Provider store={store}>
+        <API />
+      </Provider>
+    );
   }
 }
 
