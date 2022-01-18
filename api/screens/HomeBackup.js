@@ -21,9 +21,8 @@ const Home = ({ navigation }) => {
 	const createSessionHandler = () => {
 		const lastId = data.length > 0 ? data[data.length - 1].id : 0;
 		const title = "Session " + String(lastId + 1) + " - " + dateFormatted();
-		const titleId = lastId+1;
 		dispatch(actions.createSession(title));
-		navigation.navigate("Upload", {id:titleId})
+		
 	};
 
 	
@@ -76,6 +75,21 @@ const Home = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
+	sessionList: {
+		flexDirection: "row",
+		alignContent: "center",
+	},
+	header: {
+		height: 30,
+		paddingLeft: 20,
+		fontSize: 18,
+		borderBottomColor: "black",
+		borderBottomWidth: 1,
+		marginBottom: 20,
+	},
+	headerText: {
+		fontSize: 18,
+	},
 	noSession: {
 		flexDirection: "row",
 		justifyContent: "center",
@@ -84,21 +98,17 @@ const styles = StyleSheet.create({
 		fontSize: 24,
 	},
 	listItem: {
-		backgroundColor: '#FFF',
-		padding: 15,
-		borderRadius: 10,
-		flexDirection: 'row',
-		alignItems: 'center',
-		justifyContent: 'space-between',
-		marginBottom: 20,
+		flexDirection: "row",
+		justifyContent: "space-between",
+		borderColor: "black",
+		padding: 10,
+		borderWidth: 1,
 	},
 	listEditIcon: {
 		height: 25,
 		width: 25,
 	},
-	listItemTitle: {
-		fontSize:16,
-	},
+	listItemTitle: {},
 
 	container: {
 		justifyContent: "space-between",

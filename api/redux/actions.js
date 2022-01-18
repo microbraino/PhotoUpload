@@ -1,5 +1,12 @@
 import * as actionTypes from './actionTypes';
 
+const initState = (state) => ({
+  type: actionTypes.INIT_STATE,
+  payload: {
+    state: state,
+  },
+});
+
 const createSession = title => ({
   type: actionTypes.CREATE_SESSION,
   payload: {
@@ -19,22 +26,19 @@ const deleteAllSessions = () => ({
   payload: {},
 });
 
-const getAllSessions = () => ({
-  type: actionTypes.GET_ALL_SESSIONS,
-});
-
-const editSessions = (id, updated) => ({
-  type: actionTypes.GET_ALL_SESSIONS,
+const addPhotoToSession = (sessionId, photo) => ({
+  type: actionTypes.ADD_PHOTO_TO_SESSION,
   payload: {
-    id: id,
-    updated: {...updated},
+    id: sessionId,
+    photo: {...photo},
   },
 });
 
+
 export {
+  initState,
   createSession,
   deleteSession,
-  getAllSessions,
-  editSessions,
   deleteAllSessions,
+  addPhotoToSession,
 };

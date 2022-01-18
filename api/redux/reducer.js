@@ -1,12 +1,12 @@
 import * as actionTypes from "./actionTypes";
 
-const initialState = [];
+let initialState = [];
 let lastId = 0;
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case actionTypes.GET_ALL_SESSIONS: {
-      return state;
+    case actionTypes.INIT_STATE: {
+      return [...action.payload.state];
     }
     case actionTypes.CREATE_SESSION: {
       return [
@@ -27,13 +27,20 @@ const reducer = (state = initialState, action) => {
       return [];
     }
 
-    case actionTypes.EDIT_SESSION: {
-      const act = action.payload.updated;
-      const updated = { ...act };
-      editedState = state.map((session) =>
-        session.id != action.payload.id ? session : { ...session, ...updated }
+    case actionTypes.ADD_PHOTO_TO_SESSION: {
+      const editedState = state.map((session) =>
+        session.id != action.payload.id
+          ? session
+          : {
+              id: session.id,
+              title: session.title,
+              photos: [
+                ...session.photos,
+                { ...action.payload.photo },
+              ],
+            }
       );
-      return;
+      return editedState;
     }
 
     default:
