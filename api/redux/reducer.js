@@ -42,6 +42,21 @@ const reducer = (state = initialState, action) => {
       );
       return editedState;
     }
+    case actionTypes.DELETE_PHOTO_FROM_SESSION: {
+      const editedPhotos = state.find(session=>session.id ==action.payload.sessionId).photos;
+      const filteredPhotos = editedPhotos.filter(photo=>photo.id!==action.payload.photoId)
+      //console.log("editedPhoto: ", filteredPhotos);
+      const editedState = state.map((session) =>
+        session.id != action.payload.sessionId
+          ? session
+          : {
+              id: session.id,
+              title: session.title,
+              photos: [...filteredPhotos],
+            }
+      );
+      return editedState;
+    }
 
     default:
       return state;

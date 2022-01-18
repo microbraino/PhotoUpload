@@ -58,17 +58,7 @@ const getFromStorage = async (key) => {
   }
 };
 
-const fetchPhoto = (photos) => {
-  return photos.map((photo) => (
-    <View style={styles.carouselItem}>
-      <Image
-        key={Math.random()}
-        style={styles.carouselImage}
-        source={{ uri: `data:image/jpg;base64,${photo.base64}` }}
-      />
-    </View>
-  ));
-};
+
 
 const Upload = ({ route, navigation }) => {
   const { id } = route.params;
@@ -97,11 +87,30 @@ const Upload = ({ route, navigation }) => {
     });
   };
 
+  const deletePhotoHandler = (sessionId, photoId) => {
+    dispatch(actions.deletePhotoFromSession(sessionId, photoId));
+  };
+
+  const fetchPhoto = (sessionId, photos) => {
+	return photos.map((photo) => (
+	  <TouchableOpacity
+		style={styles.carouselItem}
+		onPress={()=>{deletePhotoHandler(sessionId, photo.id)}}
+	  >
+		<Image
+		  key={Math.random()}
+		  style={styles.carouselImage}
+		  source={{ uri: `data:image/jpg;base64,${photo.base64}` }}
+		/>
+	  </TouchableOpacity>
+	));
+  };
+
   return (
     <View style={styles.content}>
       <Text style={styles.uploadText}>Uploaded Documents</Text>
       <ScrollView horizontal={true} style={styles.carousel}>
-        {fetchPhoto(store[id - 1].photos)}
+        {fetchPhoto(id, store[id - 1].photos)}
       </ScrollView>
       <View style={styles.innerSection}>
         <TouchableOpacity
@@ -173,14 +182,13 @@ const styles = StyleSheet.create({
   },
   carouselImage: {
     height: 200,
-    width: 200
+    width: 200,
   },
-  carouselItem:{
-	padding: 10,
-	borderColor:"black",
-	borderWidth:1,
-	marginLeft:10
-
+  carouselItem: {
+    padding: 10,
+    borderColor: "black",
+    borderWidth: 1,
+    marginLeft: 10,
   },
 
   buttonContainer: {

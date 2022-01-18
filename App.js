@@ -19,7 +19,7 @@ class App extends React.Component {
   componentDidMount() {
     getFromStorage("persist_state").then((response) => {
       //dispatch(actions.initState(response));
-      console.log("state restored from  perminent storage:", response);
+      //console.log("state restored from  perminent storage:", response);
     });
   }
 

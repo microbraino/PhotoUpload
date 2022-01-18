@@ -30,7 +30,15 @@ const addPhotoToSession = (sessionId, photo) => ({
   type: actionTypes.ADD_PHOTO_TO_SESSION,
   payload: {
     id: sessionId,
-    photo: {...photo},
+    photo,
+  },
+});
+
+const deletePhotoFromSession = (sessionId, photoId) => ({
+  type: actionTypes.DELETE_PHOTO_FROM_SESSION,
+  payload: {
+    sessionId,
+    photoId
   },
 });
 
@@ -41,4 +49,5 @@ export {
   deleteSession,
   deleteAllSessions,
   addPhotoToSession,
+  deletePhotoFromSession
 };
