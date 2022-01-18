@@ -58,17 +58,17 @@ const getFromStorage = async (key) => {
   }
 };
 
-
 const fetchPhoto = (photos) => {
   return photos.map((photo) => (
-    <Image
-      key={Math.random()}
-      style={styles.carouselImage}
-      source={{ uri: `data:image/jpg;base64,${photo.base64}` }}
-    />
-  ))
+    <View style={styles.carouselItem}>
+      <Image
+        key={Math.random()}
+        style={styles.carouselImage}
+        source={{ uri: `data:image/jpg;base64,${photo.base64}` }}
+      />
+    </View>
+  ));
 };
-
 
 const Upload = ({ route, navigation }) => {
   const { id } = route.params;
@@ -101,38 +101,48 @@ const Upload = ({ route, navigation }) => {
     <View style={styles.content}>
       <Text style={styles.uploadText}>Uploaded Documents</Text>
       <ScrollView horizontal={true} style={styles.carousel}>
-        {
-		  fetchPhoto(store[id-1].photos)
-        }
+        {fetchPhoto(store[id - 1].photos)}
       </ScrollView>
-      <TouchableOpacity style={styles.addPhoto} onPress={() => captureImage()}>
-        <Image
-          style={styles.addPhotoIcon}
-          source={require("../assets/create_session_icon.png")}
-        />
-        <Text>Add Photo</Text>
-      </TouchableOpacity>
-
-      <View style={styles.buttonContainer}>
+      <View style={styles.innerSection}>
         <TouchableOpacity
-          style={styles.button}
-          activeOpacity={0.5}
-          onPress={() => navigation.navigate("Home")}
+          style={styles.addPhoto}
+          onPress={() => captureImage()}
         >
-          <Image
-            source={require("../assets/create_session_icon.png")}
-            style={styles.buttonIcon}
-          />
-          <Text style={styles.buttonText}>End Session</Text>
+          <View style={styles.addPhotoInner}>
+            <Image
+              style={styles.addPhotoIcon}
+              source={require("../assets/create_session_icon.png")}
+            />
+            <Text>Add Photo</Text>
+          </View>
         </TouchableOpacity>
+
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity
+            style={styles.button}
+            activeOpacity={0.5}
+            onPress={() => navigation.navigate("Home")}
+          >
+            <Image
+              source={require("../assets/create_session_icon.png")}
+              style={styles.buttonIcon}
+            />
+            <Text style={styles.buttonText}>End Session</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );
 };
 const styles = StyleSheet.create({
+  addPhotoInner: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
   addPhotoIcon: {
     height: 50,
     width: 50,
+    marginRight: 10,
   },
   addPhoto: {
     flexDirection: "row",
@@ -143,6 +153,12 @@ const styles = StyleSheet.create({
     width: 200,
     borderWidth: 1,
     marginTop: 50,
+    padding: 50,
+  },
+  innerSection: {
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "flex-end",
   },
   content: {
     flexDirection: "column",
@@ -151,20 +167,26 @@ const styles = StyleSheet.create({
   carousel: {
     flexDirection: "row",
   },
-  uploadText: {},
+  uploadText: {
+    fontSize: 24,
+    padding: 20,
+  },
   carouselImage: {
     height: 200,
-    width: 200,
+    width: 200
   },
+  carouselItem:{
+	padding: 10,
+	borderColor:"black",
+	borderWidth:1,
+	marginLeft:10
 
-  endButton: {
-    marginTop: 50,
   },
-  ///button
 
   buttonContainer: {
     flexDirection: "row",
     justifyContent: "center",
+    marginTop: 50,
   },
   button: {
     flexDirection: "row",
