@@ -8,15 +8,56 @@ import {
   StyleSheet,
   Image,
 } from "react-native";
-import { launchCamera } from "react-native-image-picker";
+import { launchCamera, launchImageLibrary } from "react-native-image-picker";
 import { useDispatch, useSelector } from "react-redux";
+import { PermissionsAndroid } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import * as actions from "../redux/actions";
-import {
-  saveToStorage,
-  getFromStorage,
-  requestCameraPermission,
-} from "../utils/";
+import Carousel from "../components/Carousel";
+
+const requestCameraPermission = async () => {
+  try {
+    const granted = await PermissionsAndroid.request(
+      PermissionsAndroid.PERMISSIONS.CAMERA,
+      {
+        title: "Cool Photo App Camera Permission",
+        message:
+          "Cool Photo App needs access to your camera " +
+          "so you can take awesome pictures.",
+        buttonNeutral: "Ask Me Later",
+        buttonNegative: "Cancel",
+        buttonPositive: "OK",
+      }
+    );
+    if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+      console.log("You can use the camera");
+    } else {
+      console.log("Camera permission denied");
+    }
+  } catch (err) {
+    console.warn(err);
+  }
+};
+
+const saveToStorage = async (key, value) => {
+  try {
+    const jsonValue = JSON.stringify(value);
+    await AsyncStorage.setItem(key, jsonValue);
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+const getFromStorage = async (key) => {
+  try {
+    const data = await AsyncStorage.getItem(key);
+    return data;
+  } catch (e) {
+    console.log(e);
+  }
+};
+
 
 const fetchPhoto = (photos) => {
   return photos.map((photo) => (
@@ -25,8 +66,9 @@ const fetchPhoto = (photos) => {
       style={styles.carouselImage}
       source={{ uri: `data:image/jpg;base64,${photo.base64}` }}
     />
-  ));
+  ))
 };
+
 
 const Upload = ({ route, navigation }) => {
   const { id } = route.params;
@@ -58,30 +100,18 @@ const Upload = ({ route, navigation }) => {
   return (
     <View style={styles.content}>
       <Text style={styles.uploadText}>Uploaded Documents</Text>
-      
-        <ScrollView
-          horizontal={true}
-          horizontal={true}
-          showsHorizontalScrollIndicator={false}
-          scrollEventThrottle={200}
-          decelerationRate="fast"
-          pagingEnabled
-          style={styles.carousel}
-        >
-          {fetchPhoto(store[id - 1].photos)}
-        </ScrollView>
-      <View style={styles.addPhotoContainer}>
-        <TouchableOpacity
-          style={styles.addPhoto}
-          onPress={() => captureImage()}
-        >
-          <Image
-            style={styles.addPhotoIcon}
-            source={require("../assets/create_session_icon.png")}
-          />
-          <Text style={styles.addPhotoText}>Add Photo</Text>
-        </TouchableOpacity>
-      </View>
+      <ScrollView horizontal={true} style={styles.carousel}>
+        {
+		  fetchPhoto(store[id-1].photos)
+        }
+      </ScrollView>
+      <TouchableOpacity style={styles.addPhoto} onPress={() => captureImage()}>
+        <Image
+          style={styles.addPhotoIcon}
+          source={require("../assets/create_session_icon.png")}
+        />
+        <Text>Add Photo</Text>
+      </TouchableOpacity>
 
       <View style={styles.buttonContainer}>
         <TouchableOpacity
@@ -100,10 +130,6 @@ const Upload = ({ route, navigation }) => {
   );
 };
 const styles = StyleSheet.create({
-  addPhotoContainer: {
-	  flexDirection:"column",
-	  justifyContent:"center"
-  },
   addPhotoIcon: {
     height: 50,
     width: 50,
@@ -111,29 +137,24 @@ const styles = StyleSheet.create({
   addPhoto: {
     flexDirection: "row",
     justifyContent: "center",
+    alignContent: "center",
     backgroundColor: "white",
     height: 200,
     width: 200,
     borderWidth: 1,
     marginTop: 50,
   },
-  addPhotoText:{
-	fontSize: 16
-  },
   content: {
     flexDirection: "column",
-    justifyContent: "center",
-	alignContent:"center",
+    justifyContent: "space-between",
   },
   carousel: {
     flexDirection: "row",
   },
-  uploadText: {
-	  fontSize:24,
-  },
+  uploadText: {},
   carouselImage: {
-    width: 300,
-    flex: 1,
+    height: 200,
+    width: 200,
   },
 
   endButton: {
